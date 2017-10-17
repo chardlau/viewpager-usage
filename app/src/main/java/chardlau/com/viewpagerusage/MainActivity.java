@@ -12,22 +12,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private UpdatePagerAdapter adapter;
     private List<String> testDataSource1 = new ArrayList<>();
-    private List<String> testDataSource2 = new ArrayList<>();
-    private List<String> testDataSource3 = new ArrayList<>();
 
     private void initialData() {
         testDataSource1.add("testDataSource1 1");
-
-        testDataSource2.add("testDataSource2 1");
-        testDataSource2.add("testDataSource2 2");
-
-        testDataSource3.add("testDataSource3 1");
-        testDataSource3.add("testDataSource3 2");
-        testDataSource3.add("testDataSource3 3");
+        testDataSource1.add("testDataSource1 2");
+        testDataSource1.add("testDataSource1 3");
     }
 
     @Override
@@ -37,28 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initialData();
 
-        adapter = new UpdatePagerAdapter();
+        UpdatePagerAdapter adapter = new UpdatePagerAdapter();
+        adapter.setTexts(testDataSource1);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_viewpager_update);
         viewPager.setAdapter(adapter);
-
-        findViewById(R.id.btn_viewpager_update_1).setOnClickListener(this);
-        findViewById(R.id.btn_viewpager_update_2).setOnClickListener(this);
-        findViewById(R.id.btn_viewpager_update_3).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_viewpager_update_1:
-                adapter.setTexts(testDataSource1);
-                break;
-            case R.id.btn_viewpager_update_2:
-                adapter.setTexts(testDataSource2);
-                break;
-            case R.id.btn_viewpager_update_3:
-                adapter.setTexts(testDataSource3);
-                break;
-        }
     }
 
 
