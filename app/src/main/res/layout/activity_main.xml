@@ -9,33 +9,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_viewpager_update_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 Text" />
-
-        <Button
-            android:id="@+id/btn_viewpager_update_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2 Text" />
-
-        <Button
-            android:id="@+id/btn_viewpager_update_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3 Text" />
-    </LinearLayout>
-
-
 </RelativeLayout>

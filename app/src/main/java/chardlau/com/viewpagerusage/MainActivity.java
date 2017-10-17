@@ -12,22 +12,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private UpdatePagerAdapter adapter;
     private List<String> testDataSource1 = new ArrayList<>();
-    private List<String> testDataSource2 = new ArrayList<>();
-    private List<String> testDataSource3 = new ArrayList<>();
 
     private void initialData() {
         testDataSource1.add("testDataSource1 1");
-
-        testDataSource2.add("testDataSource2 1");
-        testDataSource2.add("testDataSource2 2");
-
-        testDataSource3.add("testDataSource3 1");
-        testDataSource3.add("testDataSource3 2");
-        testDataSource3.add("testDataSource3 3");
+        testDataSource1.add("testDataSource1 2");
+        testDataSource1.add("testDataSource1 3");
     }
 
     @Override
@@ -37,28 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initialData();
 
-        adapter = new UpdatePagerAdapter();
+//        UpdatePagerAdapter adapter = new UpdatePagerAdapter();
+        Update2PagerAdapter adapter = new Update2PagerAdapter();
+        adapter.setTexts(testDataSource1);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_viewpager_update);
         viewPager.setAdapter(adapter);
-
-        findViewById(R.id.btn_viewpager_update_1).setOnClickListener(this);
-        findViewById(R.id.btn_viewpager_update_2).setOnClickListener(this);
-        findViewById(R.id.btn_viewpager_update_3).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_viewpager_update_1:
-                adapter.setTexts(testDataSource1);
-                break;
-            case R.id.btn_viewpager_update_2:
-                adapter.setTexts(testDataSource2);
-                break;
-            case R.id.btn_viewpager_update_3:
-                adapter.setTexts(testDataSource3);
-                break;
-        }
     }
 
 
@@ -104,5 +80,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             notifyDataSetChanged();
         }
     }
+
+private static class Update2PagerAdapter extends PagerAdapter {
+
+    private List<String> texts;
+
+    public Update2PagerAdapter() {
+        texts = new ArrayList<>();
+    }
+
+    @Override
+    public int getCount() {
+        return texts.size();
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        String text = (String) view.getTag();
+        return object.equals(text);
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        String text = texts.get(position);
+
+        TextView textView = new TextView(container.getContext());
+        textView.setTag(text);
+        textView.setText(text);
+
+        container.addView(textView);
+        return text;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        View view = container.findViewWithTag(object);
+        if (view != null) {
+            container.removeView(view);
+        }
+    }
+
+    public void setTexts(List<String> texts) {
+        this.texts.clear();
+        if (texts != null && texts.size() > 0) {
+            this.texts.addAll(texts);
+        }
+        notifyDataSetChanged();
+    }
+}
 
 }
