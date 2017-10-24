@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(adapter);
 
         findViewById(R.id.btn_random).setOnClickListener(this);
-//        findViewById(R.id.btn_insert).setOnClickListener(this);
-//        findViewById(R.id.btn_remove).setOnClickListener(this);
     }
 
     @Override
@@ -50,17 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_random:
                 adapter.setTexts(randomData());
-                viewPager.setAdapter(adapter);
                 break;
-/*
-            case R.id.btn_insert:
-                adapter.insertText();
-                break;
-
-            case R.id.btn_remove:
-                adapter.removeText();
-                break;
-*/
         }
     }
 
@@ -68,10 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         private List<String> texts;
 
-        private int idGenerator;
-
         public DynamicDataSetAdapter() {
-            idGenerator = 0;
             texts = new ArrayList<>();
         }
 
@@ -111,21 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (texts != null && texts.size() > 0) {
                 this.texts.addAll(texts);
             }
-            notifyDataSetChanged();
-        }
-
-        public synchronized void insertText() {
-            idGenerator ++;
-            String text = "Insert_" + idGenerator;
-            this.texts.add(text);
-            notifyDataSetChanged();
-        }
-
-        public synchronized void removeText() {
-            if (this.texts.size() <= 0) {
-                return;
-            }
-            this.texts.remove(0);
             notifyDataSetChanged();
         }
     }
