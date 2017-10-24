@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -42,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(adapter);
 
         findViewById(R.id.btn_random).setOnClickListener(this);
-        findViewById(R.id.btn_insert).setOnClickListener(this);
-        findViewById(R.id.btn_remove).setOnClickListener(this);
+//        findViewById(R.id.btn_insert).setOnClickListener(this);
+//        findViewById(R.id.btn_remove).setOnClickListener(this);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.setTexts(randomData());
                 viewPager.setAdapter(adapter);
                 break;
-
+/*
             case R.id.btn_insert:
                 adapter.insertText();
                 break;
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_remove:
                 adapter.removeText();
                 break;
+*/
         }
     }
 
