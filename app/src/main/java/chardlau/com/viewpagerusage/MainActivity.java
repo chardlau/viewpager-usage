@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            String text = (String) view.getTag();
-            return object.equals(text);
+            return object.equals(view);
         }
 
         @Override
@@ -80,15 +79,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textView.setText(text);
 
             container.addView(textView);
-            return text;
+            return textView;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = container.findViewWithTag(object);
-            if (view != null) {
-                container.removeView(view);
+            container.removeView((View) object);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            View view = (View) object;
+            String text = (String) view.getTag();
+            if (text == null) {
+                return PagerAdapter.POSITION_NONE;
             }
+
+            int index = this.texts.indexOf(text);
+            if (index == -1) {
+                return PagerAdapter.POSITION_NONE;
+            }
+
+            return index;
         }
 
         public synchronized void setTexts(List<String> texts) {
