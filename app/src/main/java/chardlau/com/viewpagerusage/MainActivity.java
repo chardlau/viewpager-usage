@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         initialData();
 
-//        UpdatePagerAdapter adapter = new UpdatePagerAdapter();
-        Update2PagerAdapter adapter = new Update2PagerAdapter();
+        UpdatePagerAdapter adapter = new UpdatePagerAdapter();
         adapter.setTexts(testDataSource1);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_viewpager_update);
@@ -80,53 +79,5 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
-
-private static class Update2PagerAdapter extends PagerAdapter {
-
-    private List<String> texts;
-
-    public Update2PagerAdapter() {
-        texts = new ArrayList<>();
-    }
-
-    @Override
-    public int getCount() {
-        return texts.size();
-    }
-
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        String text = (String) view.getTag();
-        return object.equals(text);
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        String text = texts.get(position);
-
-        TextView textView = new TextView(container.getContext());
-        textView.setTag(text);
-        textView.setText(text);
-
-        container.addView(textView);
-        return text;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        View view = container.findViewWithTag(object);
-        if (view != null) {
-            container.removeView(view);
-        }
-    }
-
-    public void setTexts(List<String> texts) {
-        this.texts.clear();
-        if (texts != null && texts.size() > 0) {
-            this.texts.addAll(texts);
-        }
-        notifyDataSetChanged();
-    }
-}
 
 }
