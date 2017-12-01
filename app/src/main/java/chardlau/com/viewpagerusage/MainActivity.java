@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private List<String> testDataSource1 = new ArrayList<>();
 
     private void initialData() {
-        testDataSource1.add("testDataSource1 1");
-        testDataSource1.add("testDataSource1 2");
-        testDataSource1.add("testDataSource1 3");
+        testDataSource1.add("Data 1");
+        testDataSource1.add("Data 2");
+        testDataSource1.add("Data 3");
     }
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_viewpager_update);
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(Integer.MAX_VALUE / 2, false);
     }
 
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return texts.size();
+            return Integer.MAX_VALUE;
         }
 
         @Override
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            String text = texts.get(position);
+            Log.e("Adapter", "position: " + position);
+            int index = position % 3;
+            String text = texts.get(index);
 
             TextView textView = new TextView(container.getContext());
             textView.setText(text);
